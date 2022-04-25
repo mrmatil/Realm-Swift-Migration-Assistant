@@ -22,8 +22,8 @@ public class RealmMigrationAssistant {
             }
         }
     }
-    private var migrationsCount: Int { migrations.count }
     
+    private var migrationsCount: Int { migrations.count }
     private var migrations: [RealmMigrationProtocol] = []
     
     init(delegate: RealmMigrationAssistantDelegate?, context: NSManagedObjectContext? = nil) {
@@ -37,7 +37,7 @@ public class RealmMigrationAssistant {
     }
     
     public func addMigration<RealmObject: Object>(data: [String: Any], realmObject: RealmObject) {
-        let migration = RealmMigrationUserDefaultsAssistant(data: data)
+        let migration = RealmMigrationUserDefaultsAssistant<RealmObject>(data: data)
         migrations.append(migration)
     }
     
