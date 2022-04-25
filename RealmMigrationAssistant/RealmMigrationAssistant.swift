@@ -9,12 +9,6 @@ import Foundation
 import RealmSwift
 import CoreData
 
-protocol RealmMigrationAssistantDelegate: AnyObject {
-    func migrationSuccess()
-    func migrationError(description: String)
-    func migrationProgress(finishedMigrations: Int, allMigrations: Int)
-}
-
 public class RealmMigrationAssistant {
     
     private let context: NSManagedObjectContext?

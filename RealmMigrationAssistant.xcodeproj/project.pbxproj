@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		23116D3928161A36001F2793 /* RealmMigrationAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23116D3828161A36001F2793 /* RealmMigrationAssistant.swift */; };
+		23116D3F28162A70001F2793 /* RealmMigrationAssistantDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23116D3E28162A70001F2793 /* RealmMigrationAssistantDelegate.swift */; };
 		232B241F2815B6C0009ED987 /* RealmMigrationAssistant.h in Headers */ = {isa = PBXBuildFile; fileRef = 232B241E2815B6C0009ED987 /* RealmMigrationAssistant.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		232B242A2815B6C7009ED987 /* CoreDataMigrationManaged.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232B24272815B6C7009ED987 /* CoreDataMigrationManaged.swift */; };
 		232B242D2815B6E4009ED987 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 232B242C2815B6E4009ED987 /* Realm */; };
@@ -19,6 +20,7 @@
 
 /* Begin PBXFileReference section */
 		23116D3828161A36001F2793 /* RealmMigrationAssistant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmMigrationAssistant.swift; sourceTree = "<group>"; };
+		23116D3E28162A70001F2793 /* RealmMigrationAssistantDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmMigrationAssistantDelegate.swift; sourceTree = "<group>"; };
 		232B241B2815B6C0009ED987 /* RealmMigrationAssistant.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RealmMigrationAssistant.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		232B241E2815B6C0009ED987 /* RealmMigrationAssistant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RealmMigrationAssistant.h; sourceTree = "<group>"; };
 		232B24272815B6C7009ED987 /* CoreDataMigrationManaged.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataMigrationManaged.swift; sourceTree = "<group>"; };
@@ -40,6 +42,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		23116D3C28162A50001F2793 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				23116D3E28162A70001F2793 /* RealmMigrationAssistantDelegate.swift */,
+				232B24272815B6C7009ED987 /* CoreDataMigrationManaged.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		23116D3D28162A5B001F2793 /* Internal */ = {
+			isa = PBXGroup;
+			children = (
+				23E622112815CD0500BA1B36 /* RealmMigrationBaseAssistant.swift */,
+				23E622132815CEB000BA1B36 /* RealmMigrationCoreDataAssistant.swift */,
+				23E622152815D05F00BA1B36 /* RealmMigrationUserDefaultsAssistant.swift */,
+			);
+			path = Internal;
+			sourceTree = "<group>";
+		};
 		232B24112815B6C0009ED987 = {
 			isa = PBXGroup;
 			children = (
@@ -61,10 +82,8 @@
 			children = (
 				232B241E2815B6C0009ED987 /* RealmMigrationAssistant.h */,
 				23116D3828161A36001F2793 /* RealmMigrationAssistant.swift */,
-				23E622112815CD0500BA1B36 /* RealmMigrationBaseAssistant.swift */,
-				23E622132815CEB000BA1B36 /* RealmMigrationCoreDataAssistant.swift */,
-				23E622152815D05F00BA1B36 /* RealmMigrationUserDefaultsAssistant.swift */,
-				232B24272815B6C7009ED987 /* CoreDataMigrationManaged.swift */,
+				23116D3C28162A50001F2793 /* Protocols */,
+				23116D3D28162A5B001F2793 /* Internal */,
 			);
 			path = RealmMigrationAssistant;
 			sourceTree = "<group>";
@@ -160,6 +179,7 @@
 				23E622162815D05F00BA1B36 /* RealmMigrationUserDefaultsAssistant.swift in Sources */,
 				23E622122815CD0500BA1B36 /* RealmMigrationBaseAssistant.swift in Sources */,
 				23E622142815CEB000BA1B36 /* RealmMigrationCoreDataAssistant.swift in Sources */,
+				23116D3F28162A70001F2793 /* RealmMigrationAssistantDelegate.swift in Sources */,
 				232B242A2815B6C7009ED987 /* CoreDataMigrationManaged.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
