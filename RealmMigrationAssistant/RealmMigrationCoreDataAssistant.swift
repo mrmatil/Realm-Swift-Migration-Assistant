@@ -9,15 +9,20 @@ import Foundation
 import RealmSwift
 import CoreData
 
-public class RealmMigrationCoreDataAssistant<CoreDataObject: NSManagedObject, RealmObject: Object> : RealmMigrationBaseAssistant<RealmObject> {
+protocol RealmMigrationCoreDataAssistantProtocol {
+    func migrate(completionHandler: (RealmMigrationStatus)->Void)
+    func migrate(from coreDataObject: [NSManagedObject], completionHandler: (RealmMigrationStatus)->Void)
+}
+
+class RealmMigrationCoreDataAssistant<CoreDataObject: NSManagedObject, RealmObject: Object>  : RealmMigrationBaseAssistant<RealmObject>, RealmMigrationCoreDataAssistantProtocol where CoreDataObject: CoreDataMigrationManaged {
     private var context: NSManagedObjectContext?
     
-    public init(context: NSManagedObjectContext?) {
+    init(context: NSManagedObjectContext?) {
         self.context = context
         super.init()
     }
     
-    public func migrate(completionHandler: (RealmMigrationStatus)->Void) where CoreDataObject: CoreDataMigrationManaged {
+    func migrate(completionHandler: (RealmMigrationStatus)->Void) {
         do {
             let coreDataEntities = try getCoreDataEntity()
             migrate(from: coreDataEntities, completionHandler: completionHandler)
@@ -30,7 +35,7 @@ public class RealmMigrationCoreDataAssistant<CoreDataObject: NSManagedObject, Re
         }
     }
 
-    public func migrate(from coreDataObject: [NSManagedObject], completionHandler: (RealmMigrationStatus)->Void) {
+    func migrate(from coreDataObject: [NSManagedObject], completionHandler: (RealmMigrationStatus)->Void) {
         var realmObjects: [RealmObject] = []
         do {
             for entity in coreDataObject {

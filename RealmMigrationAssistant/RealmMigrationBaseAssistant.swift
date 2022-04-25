@@ -17,7 +17,7 @@ public enum RealmMigrationStatus {
     case error(String)
 }
 
-public class RealmMigrationBaseAssistant<RealmObject: Object> {
+class RealmMigrationBaseAssistant<RealmObject: Object> {
     
     func createRealmObject(from dictionary: [String: Any]) throws -> RealmObject {
         let tempRealmModel: RealmObject = RealmObject()

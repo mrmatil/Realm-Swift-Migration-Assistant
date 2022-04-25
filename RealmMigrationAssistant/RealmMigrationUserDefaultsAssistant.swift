@@ -8,15 +8,19 @@
 import Foundation
 import RealmSwift
 
-public class RealmMigrationUserDefaultsAssistant<RealmObject: Object>: RealmMigrationBaseAssistant<RealmObject> {
+protocol RealmMigrationUserDefaultsAssistantProtocol {
+    func migrate(completionHandler: (RealmMigrationStatus) -> Void)
+}
+
+class RealmMigrationUserDefaultsAssistant<RealmObject: Object>: RealmMigrationBaseAssistant<RealmObject>, RealmMigrationUserDefaultsAssistantProtocol {
     
     private var userDefaultsData: [String: Any]
     
-    public init(data: [String: Any]) {
+    init(data: [String: Any]) {
         self.userDefaultsData = data
     }
     
-    public func migrate(completionHandler: (RealmMigrationStatus) -> Void) {
+    func migrate(completionHandler: (RealmMigrationStatus) -> Void) {
         do {
             let realmObject = try createRealmObject(from: userDefaultsData)
             saveRealmData(data: [realmObject], completionHandler: completionHandler)

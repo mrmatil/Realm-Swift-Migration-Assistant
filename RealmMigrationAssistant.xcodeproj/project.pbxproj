@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		23116D3928161A36001F2793 /* RealmMigrationAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23116D3828161A36001F2793 /* RealmMigrationAssistant.swift */; };
 		232B241F2815B6C0009ED987 /* RealmMigrationAssistant.h in Headers */ = {isa = PBXBuildFile; fileRef = 232B241E2815B6C0009ED987 /* RealmMigrationAssistant.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		232B242A2815B6C7009ED987 /* CoreDataMigrationManaged.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232B24272815B6C7009ED987 /* CoreDataMigrationManaged.swift */; };
 		232B242D2815B6E4009ED987 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 232B242C2815B6E4009ED987 /* Realm */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		23116D3828161A36001F2793 /* RealmMigrationAssistant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmMigrationAssistant.swift; sourceTree = "<group>"; };
 		232B241B2815B6C0009ED987 /* RealmMigrationAssistant.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RealmMigrationAssistant.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		232B241E2815B6C0009ED987 /* RealmMigrationAssistant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RealmMigrationAssistant.h; sourceTree = "<group>"; };
 		232B24272815B6C7009ED987 /* CoreDataMigrationManaged.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataMigrationManaged.swift; sourceTree = "<group>"; };
@@ -58,6 +60,7 @@
 			isa = PBXGroup;
 			children = (
 				232B241E2815B6C0009ED987 /* RealmMigrationAssistant.h */,
+				23116D3828161A36001F2793 /* RealmMigrationAssistant.swift */,
 				23E622112815CD0500BA1B36 /* RealmMigrationBaseAssistant.swift */,
 				23E622132815CEB000BA1B36 /* RealmMigrationCoreDataAssistant.swift */,
 				23E622152815D05F00BA1B36 /* RealmMigrationUserDefaultsAssistant.swift */,
@@ -153,6 +156,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				23116D3928161A36001F2793 /* RealmMigrationAssistant.swift in Sources */,
 				23E622162815D05F00BA1B36 /* RealmMigrationUserDefaultsAssistant.swift in Sources */,
 				23E622122815CD0500BA1B36 /* RealmMigrationBaseAssistant.swift in Sources */,
 				23E622142815CEB000BA1B36 /* RealmMigrationCoreDataAssistant.swift in Sources */,
