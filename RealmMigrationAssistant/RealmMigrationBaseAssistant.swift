@@ -17,6 +17,10 @@ public enum RealmMigrationStatus {
     case error(String)
 }
 
+protocol RealmMigrationProtocol {
+    func migrate(completionHandler: (RealmMigrationStatus)->Void)
+}
+
 class RealmMigrationBaseAssistant<RealmObject: Object> {
     
     func createRealmObject(from dictionary: [String: Any]) throws -> RealmObject {

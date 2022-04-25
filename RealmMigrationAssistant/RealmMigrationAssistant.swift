@@ -20,13 +20,17 @@ public class RealmMigrationAssistant {
     private let context: NSManagedObjectContext?
     private weak var delegate: RealmMigrationAssistantDelegate?
     
-    private var migrationsFinished: Int = 0
-    private var migrationsCount: Int {
-        coreDataMigrations.count + userDefaultsMigrations.count
+    private var migrationsFinished: Int = 0 {
+        didSet {
+            delegate?.migrationProgress(finishedMigrations: migrationsFinished, allMigrations: migrationsCount)
+            if migrationsFinished == migrationsCount, migrationsCount > 0 {
+                delegate?.migrationSuccess()
+            }
+        }
     }
+    private var migrationsCount: Int { migrations.count }
     
-    private var coreDataMigrations: [RealmMigrationCoreDataAssistantProtocol] = []
-    private var userDefaultsMigrations: [RealmMigrationUserDefaultsAssistantProtocol] = []
+    private var migrations: [RealmMigrationProtocol] = []
     
     init(delegate: RealmMigrationAssistantDelegate?, context: NSManagedObjectContext? = nil) {
         self.context = context
@@ -35,18 +39,28 @@ public class RealmMigrationAssistant {
     
     public func addMigration<CoreDataObject: NSManagedObject, RealmObject: Object>(coreDataObject: CoreDataObject, realmObject: RealmObject) where CoreDataObject: CoreDataMigrationManaged {
         let migration = RealmMigrationCoreDataAssistant<CoreDataObject, RealmObject>(context: context)
-        coreDataMigrations.append(migration)
+        migrations.append(migration)
     }
     
     public func addMigration<RealmObject: Object>(data: [String: Any], realmObject: RealmObject) {
         let migration = RealmMigrationUserDefaultsAssistant(data: data)
-        userDefaultsMigrations.append(migration)
+        migrations.append(migration)
     }
     
     public func startMigration() {
         migrationsFinished = 0
         delegate?.migrationProgress(finishedMigrations: migrationsFinished, allMigrations: migrationsCount)
         
-        //
+        for migration in migrations {
+            migration.migrate { status in
+                switch status {
+                case .success:
+                    migrationsFinished += 1
+                case .error(let error):
+                    delegate?.migrationError(description: error)
+                    return
+                }
+            }
+        }
     }
 }

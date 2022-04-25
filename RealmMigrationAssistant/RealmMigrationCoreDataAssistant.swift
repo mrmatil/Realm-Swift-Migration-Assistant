@@ -9,12 +9,7 @@ import Foundation
 import RealmSwift
 import CoreData
 
-protocol RealmMigrationCoreDataAssistantProtocol {
-    func migrate(completionHandler: (RealmMigrationStatus)->Void)
-    func migrate(from coreDataObject: [NSManagedObject], completionHandler: (RealmMigrationStatus)->Void)
-}
-
-class RealmMigrationCoreDataAssistant<CoreDataObject: NSManagedObject, RealmObject: Object>  : RealmMigrationBaseAssistant<RealmObject>, RealmMigrationCoreDataAssistantProtocol where CoreDataObject: CoreDataMigrationManaged {
+class RealmMigrationCoreDataAssistant<CoreDataObject: NSManagedObject, RealmObject: Object>  : RealmMigrationBaseAssistant<RealmObject>, RealmMigrationProtocol where CoreDataObject: CoreDataMigrationManaged {
     private var context: NSManagedObjectContext?
     
     init(context: NSManagedObjectContext?) {
@@ -35,7 +30,7 @@ class RealmMigrationCoreDataAssistant<CoreDataObject: NSManagedObject, RealmObje
         }
     }
 
-    func migrate(from coreDataObject: [NSManagedObject], completionHandler: (RealmMigrationStatus)->Void) {
+    private func migrate(from coreDataObject: [NSManagedObject], completionHandler: (RealmMigrationStatus)->Void) {
         var realmObjects: [RealmObject] = []
         do {
             for entity in coreDataObject {
