@@ -10,16 +10,20 @@ import RealmSwift
 
 class RealmMigrationUserDefaultsAssistant<RealmObject: Object>: RealmMigrationBaseAssistant<RealmObject>, RealmMigrationProtocol {
     
-    private var userDefaultsData: [String: Any]
+    private var userDefaultsData: [[String: Any]]
     
-    init(data: [String: Any]) {
+    init(data: [[String: Any]]) {
         self.userDefaultsData = data
     }
     
     func migrate(completionHandler: (RealmMigrationStatus) -> Void) {
         do {
-            let realmObject = try createRealmObject(from: userDefaultsData)
-            saveRealmData(data: [realmObject], completionHandler: completionHandler)
+            var realmObjects: [RealmObject] = []
+            for tempData in userDefaultsData {
+                let realmObject = try createRealmObject(from: tempData)
+                realmObjects.append(realmObject)
+            }
+            saveRealmData(data: realmObjects, completionHandler: completionHandler)
         } catch RealmMigrationToolError.error(let description) {
             completionHandler(.error(description))
         } catch {

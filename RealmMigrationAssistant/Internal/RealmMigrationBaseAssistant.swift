@@ -23,6 +23,8 @@ protocol RealmMigrationProtocol {
 
 class RealmMigrationBaseAssistant<RealmObject: Object> {
     
+    var restrictNumber: Int?
+    
     func createRealmObject(from dictionary: [String: Any]) throws -> RealmObject {
         let tempRealmModel: RealmObject = RealmObject()
         tempRealmModel.createObject(value: dictionary)
@@ -39,12 +41,5 @@ class RealmMigrationBaseAssistant<RealmObject: Object> {
         } catch {
             completionHandler(.error(error.localizedDescription))
         }
-    }
-}
-
-import Realm.Private
-extension Object {
-    func createObject(value: Any) {
-        RLMInitializeWithValue(self, value, .partialPrivateShared())
     }
 }

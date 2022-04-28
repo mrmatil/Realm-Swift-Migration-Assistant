@@ -31,13 +31,23 @@ public class RealmMigrationAssistant {
         self.delegate = delegate
     }
     
-    public func addMigration<CoreDataObject: NSManagedObject, RealmObject: Object>(coreDataObject: CoreDataObject, realmObject: RealmObject) where CoreDataObject: CoreDataMigrationManaged {
+    public func addMigration<CoreDataObject: NSManagedObject, RealmObject: Object>(coreDataObject: CoreDataObject,
+                                                                                   renamedVariables: [String: String]? = nil,
+                                                                                   addedVariables: [[String: Any]]? = nil,
+                                                                                   removedVariables: [String]? = nil,
+                                                                                   restrictNumber: Int? = nil,
+                                                                                   realmObject: RealmObject) where CoreDataObject: CoreDataMigrationManaged {
         let migration = RealmMigrationCoreDataAssistant<CoreDataObject, RealmObject>(context: context)
+        migration.changeVariables(addedVariables: addedVariables, removedVariables: removedVariables, renamedVariables: renamedVariables)
+        migration.restrictNumber = restrictNumber
         migrations.append(migration)
     }
     
-    public func addMigration<RealmObject: Object>(data: [String: Any], realmObject: RealmObject) {
+    public func addMigration<RealmObject: Object>(data: [[String: Any]],
+                                                  restrictNumber: Int? = nil,
+                                                  realmObject: RealmObject) {
         let migration = RealmMigrationUserDefaultsAssistant<RealmObject>(data: data)
+        migration.restrictNumber = restrictNumber
         migrations.append(migration)
     }
     
